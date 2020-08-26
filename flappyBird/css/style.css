@@ -1,0 +1,55 @@
+@font-face {
+    font-family: 'Oswald';
+    src: url('../fonts/Oswald-Regular.ttf') format('truetype');
+}
+
+* {
+    font-family: 'Oswald', sans-serif;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    background-color: #0D262D;
+    color: #fff;
+    height: 100%;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100%;
+}
+
+.exercise div {
+    font-size: 3em;
+    border: solid 5px #fff;
+    padding: 20px 40px;
+    margin: 10px;
+}
+
+.exercise div:nth-of-type(1) {
+    background-color: darkgoldenrod;
+}
+
+.exercise div:nth-of-type(2) {
+    background-color: crimson;
+}
+
+.exercise div:nth-of-type(3) {
+    background-color: darkcyan;
+}
+
+.exercise div:nth-of-type(4) {
+    background-color: darkorchid;
+}
+
+.exercise .spotlight {
+    border: solid 10px greenyellow;
+    color: greenyellow;
+    font-weight: bold;
+}
