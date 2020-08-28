@@ -5,7 +5,7 @@ function newElement(tagName, className) {
 }
 
 function Barrier(reverse = false) {
-    this.element = newElement('div', 'barrier') 
+    this.element = newElement('div', 'barrier')
     const edge = newElement('div', 'edge')
     const corps = newElement('div', 'corps')
     this.element.appendChild(reverse ? corps : edge)
@@ -23,7 +23,7 @@ function PairOfBarriers(height, opening, x) {
 
     this.upper = new Barrier(true)
     this.lower = new Barrier(false)
-    
+
     this.element.appendChild(this.upper.element)
     this.element.appendChild(this.lower.element)
 
@@ -63,13 +63,13 @@ function Barriers(height, width, opening, space, notifyPoint) {
                 pair.drawOpening()
             }
             const middle = width / 2
-            const crossedMiddle = pair.getX() + displacement >= middle && pair.getX() < middle 
-                if (crossedMiddle) notifyPoint() 
+            const crossedMiddle = pair.getX() + displacement >= middle && pair.getX() < middle
+            if (crossedMiddle) notifyPoint()
         })
     }
 }
 
-function Bird(gameHeight){
+function Bird(gameHeight) {
     let flying = false
 
     this.element = newElement('img', 'bird')
@@ -115,6 +115,32 @@ function Progress() {
 //     bird.animate()
 // }, 20);
 
+function overlapping(elementA, elementB) {
+    const a = elementA.getBoundingClientRect()
+    const b = elementB.getBoundingClientRect()
+
+    const horizontal = a.leftSide + a.width >= b.leftSide
+        && b.leftSide + b.width >= a.leftSide
+    const vertical = a.top + a.height >= b.top
+        && b.top + b.height >= a.top
+        return horizontal && vertical
+}
+
+function collided(bird, barriers) {
+    let collided = false
+    barriers.pairs.forEach(pairOfBarriers => {
+        if (!collided) {
+            const upper = pairOfBarriers.upper.element
+            const lower = pairOfBarriers.lower.element
+            collided = overlapping(bird.element, upper)
+                || overlapping(bird.element, lower)
+        }
+    })
+    return collided
+}
+
+
+
 function FlappyBird() {
     let points = 0
 
@@ -124,19 +150,23 @@ function FlappyBird() {
 
     const progress = new Progress()
     const barriers = new Barriers(height, width, 200, 400, () => progress.updatePoints(++points))
-        const bird = new Bird(height)
+    const bird = new Bird(height)
 
-        gameArea.appendChild(progress.element)
-        gameArea.appendChild(bird.element)
-        barriers.pairs.forEach(pair => gameArea.appendChild(pair.element))
-    
-        this.start = () => {
-            //game loop
-            const timer = setInterval(() => {
-                barriers.animate()
-                bird.animate()
-            },20)
-        }
+    gameArea.appendChild(progress.element)
+    gameArea.appendChild(bird.element)
+    barriers.pairs.forEach(pair => gameArea.appendChild(pair.element))
+
+    this.start = () => {
+        //game loop
+        const timer = setInterval(() => {
+            barriers.animate()
+            bird.animate()
+
+            if(collided(bird, barriers)) {
+                clearInterval(timer)
+            }
+        }, 20)
+    }
 }
 
 new FlappyBird().start()
