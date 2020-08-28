@@ -5,8 +5,7 @@ function newElement(tagName, className) {
 }
 
 function Barrier(reverse = false) {
-    this.element = newElement('div', 'barrier')    
-
+    this.element = newElement('div', 'barrier') 
     const edge = newElement('div', 'edge')
     const corps = newElement('div', 'corps')
     this.element.appendChild(reverse ? corps : edge)
@@ -16,7 +15,7 @@ function Barrier(reverse = false) {
 }
 
 // const b = new Barrier(true)
-// b.setHeight(300)
+// b.setHeight(200)
 // document.querySelector('[wm-flappy]').appendChild(b.element)
 
 function PairOfBarriers(height, opening, x) {
@@ -24,7 +23,7 @@ function PairOfBarriers(height, opening, x) {
 
     this.upper = new Barrier(true)
     this.lower = new Barrier(false)
-
+    
     this.element.appendChild(this.upper.element)
     this.element.appendChild(this.lower.element)
 
@@ -34,7 +33,6 @@ function PairOfBarriers(height, opening, x) {
         this.upper.setHeight(upperHeight)
         this.lower.setHeight(lowerHeight)
     }
-
     this.getX = () => parseInt(this.element.style.left.split('px')[0])
     this.setX = x => this.element.style.left = `${x}px`
     this.getWidth = () => this.element.clientWidth
@@ -43,7 +41,7 @@ function PairOfBarriers(height, opening, x) {
     this.setX(x)
 }
 
-// const b = new pairOfBarriers(700, 200,800)
+// const b = new PairOfBarriers(700, 200, 400)
 // document.querySelector('[wm-flappy]').appendChild(b.element)
 
 function Barriers(height, width, opening, space, notifyPoint) {
@@ -64,17 +62,16 @@ function Barriers(height, width, opening, space, notifyPoint) {
                 pair.setX(pair.getX() + space * this.pairs.length)
                 pair.drawOpening()
             }
-
             const middle = width / 2
-            const crossedMiddle = pair.getX() + displacement >= middle
-                && pair.getX() < middle
-            if (crossedMiddle) notifyPoint()
+            const crossedMiddle = pair.getX() + displacement >= middle && pair.getX() < middle 
+                if (crossedMiddle) notifyPoint() 
         })
-    } 
+    }
 }
 
-function Bird(gameHeight) {
+function Bird(gameHeight){
     let flying = false
+
     this.element = newElement('img', 'bird')
     this.element.src = 'imgs/bird.png'
 
@@ -96,7 +93,6 @@ function Bird(gameHeight) {
             this.setY(newY)
         }
     }
-
     this.setY(gameHeight / 2)
 }
 
@@ -108,17 +104,16 @@ function Progress() {
     }
     this.updatePoints(0)
 }
-
-// const barriers = new Barriers(700, 1200, 200, 400)
 // const bird = new Bird(700)
 // const gameArea = document.querySelector('[wm-flappy]')
+// const barriers = new Barriers(700, 1200, 200, 400)
 // gameArea.appendChild(bird.element)
 // gameArea.appendChild(new Progress().element)
 // barriers.pairs.forEach(pair => gameArea.appendChild(pair.element))
 // setInterval(() => {
 //     barriers.animate()
 //     bird.animate()
-// },20)
+// }, 20);
 
 function FlappyBird() {
     let points = 0
@@ -134,10 +129,9 @@ function FlappyBird() {
         gameArea.appendChild(progress.element)
         gameArea.appendChild(bird.element)
         barriers.pairs.forEach(pair => gameArea.appendChild(pair.element))
-
     
         this.start = () => {
-            // game loop
+            //game loop
             const timer = setInterval(() => {
                 barriers.animate()
                 bird.animate()
