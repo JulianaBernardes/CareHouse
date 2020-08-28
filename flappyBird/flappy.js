@@ -135,6 +135,7 @@ function FlappyBird() {
         gameArea.appendChild(bird.element)
         barriers.pairs.forEach(pair => gameArea.appendChild(pair.element))
 
+    
         this.start = () => {
             // game loop
             const timer = setInterval(() => {
