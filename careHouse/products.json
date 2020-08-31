@@ -5,7 +5,7 @@
         "fields": {
           "title": "double bed",
           "price": 499.00,
-          "image": { "fields": { "file": { "url": "./images/product-1.jpeg" } } }
+          "image": { "fields": { "file": { "url": "./images/product-1.jpg" } } }
         }
       },
       {
@@ -13,7 +13,7 @@
         "fields": {
           "title": "panel and bed",
           "price": 120.99,
-          "image": { "fields": { "file": { "url": "./images/product-2.jpeg" } } }
+          "image": { "fields": { "file": { "url": "./images/product-2.jpg" } } }
         }
       },
       {
@@ -21,15 +21,15 @@
         "fields": {
           "title": "large panel bed",
           "price": 120.99,
-          "image": { "fields": { "file": { "url": "./images/product-3.jpeg" } } }
+          "image": { "fields": { "file": { "url": "./images/product-3.jpg" } } }
         }
       },
       {
         "sys": { "id": "4" },
         "fields": {
-          "title": "nightstand",
-          "price": 52.99,
-          "image": { "fields": { "file": { "url": "./images/product-4.jpeg" } } }
+          "title": "single beds",
+          "price": 152.99,
+          "image": { "fields": { "file": { "url": "./images/product-4.jpg" } } }
         }
       },
       {
@@ -37,7 +37,7 @@
         "fields": {
           "title": "black couch",
           "price": 388.99,
-          "image": { "fields": { "file": { "url": "./images/product-5.jpeg" } } }
+          "image": { "fields": { "file": { "url": "./images/product-5.jpg" } } }
         }
       },
       {
@@ -45,7 +45,7 @@
         "fields": {
           "title": "brown couch",
           "price": 377.99,
-          "image": { "fields": { "file": { "url": "./images/product-6.jpeg" } } }
+          "image": { "fields": { "file": { "url": "./images/product-6.jpg" } } }
         }
       },
       {
@@ -53,7 +53,7 @@
         "fields": {
           "title": "white couch",
           "price": 445.99,
-          "image": { "fields": { "file": { "url": "./images/product-7.jpeg" } } }
+          "image": { "fields": { "file": { "url": "./images/product-7.jpg" } } }
         }
       },
       {
@@ -61,7 +61,7 @@
         "fields": {
           "title": "gray couch",
           "price": 233.99,
-          "image": { "fields": { "file": { "url": "./images/product-8.jpeg" } } }
+          "image": { "fields": { "file": { "url": "./images/product-8.jpg" } } }
         }
       }
     ]
