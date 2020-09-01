@@ -10,8 +10,11 @@ const cartTotal = document.querySelector(".cart-total")
 const cartContent = document.querySelector(".cart-content")
 const productsDOM = document.querySelector(".products-center")
 
+const btns = document.querySelectorAll(".bag-btn")
 // cart
 let cart = []
+// buttons
+let buttonsDOM = []
 
 // getting the products
 class Products {
@@ -52,7 +55,7 @@ class UI {
                         add to bag
                     </button>
                 </div>
-                <h3>€${product.title}</h3>
+                <h3>${product.title}</h3>
                 <h4>€${product.price}</h4>
             </article>
             <!-- end of single porduct -->
@@ -60,13 +63,41 @@ class UI {
         })
         productsDOM.innerHTML = result
     }
+    getBagButtons() {
+        const buttons = [...document.querySelectorAll(".bag-btn")]
+        buttonsDOM = buttons
+        buttons.forEach(button => {
+            let id = button.dataset.id
+            let inCart = cart.find(item => item.id === id)
+            if (inCart) {
+                button.innerText = "In cart"
+                button.disabled = true
+            }
+            button.addEventListener('click', (event) => {
+                event.target.innerText = "In cart"
+                event.target.disabled = true
+                // get product from products
+                let cartItem = {...Storage.getProduct(id), amount:1}
+                console.log(cartItem)
+                // add product to the cart
+                // save cart in local storage
+                // set cart values
+                // display cart item
+                // show the cart
+            })
+        })
+    }
 }
 
 // local storage
 class Storage {
-static saveProducts(products){
-    localStorage.setItem("products", JSON.stringify(products))
-}
+    static saveProducts(products) {
+        localStorage.setItem("products", JSON.stringify(products))
+    }
+    static getProduct(id){
+        let products = JSON.parse(localStorage.getItem('products'))
+        return products.find(product => product.id === id)
+    }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -74,9 +105,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const products = new Products()
 
     // get all products
-    products.getProducts().then(products => {ui.displayProducts(products)
+    products.getProducts().then(products => {
+        ui.displayProducts(products)
 
-    Storage.saveProducts(products)}
-    )
+        Storage.saveProducts(products)
+    }).then(() => {
+        ui.getBagButtons()
+    })
 })
 
