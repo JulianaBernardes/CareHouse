@@ -52,7 +52,7 @@ class UI {
                     >
                     <button class="bag-btn" data-id=${product.id}>
                         <i class="fas fa-shopping-cart"></i>
-                        add to bag
+                        add to cart
                     </button>
                 </div>
                 <h3>${product.title}</h3>
@@ -139,16 +139,33 @@ class UI {
     }
     cartLogic() {
         // clear cart button
-        clearCartBtn.addEventListener('click', ()=>{
+        clearCartBtn.addEventListener("click", () => {
             this.clearCart()
         })
         // cart functionality
+        cartContent.addEventListener("click", event => {
+            if (event.target.classList.contains("remove-item")) {
+                let removeItem = event.target
+                let id = removeItem.dataset.id
+                cartContent.removeChild(removeItem.parentElement.parentElement);
+                this.removeItem(id)
+            }
+            else if (event.target.classList.contains("fa-chevron-up")) {
+                let addAmount = event.target
+                let id = addAmount.dataset.id
+                let tempItem = cart.find(item => item.id === id)
+                tempItem.amount = tempItem.amount + 1
+                Storage.saveCart(cart)
+                this.setCartValues(cart)
+                addAmount.nextElementSibling.innerText = tempItem.amount
+            }
+        })
     }
     clearCart() {
         let cartItems = cart.map(item => item.id)
         cartItems.forEach(id => this.removeItem(id))
         console.log(cartContent.children)
-        while(cartContent.children.length>0) {
+        while (cartContent.children.length > 0) {
             cartContent.removeChild(cartContent.children[0])
         }
         this.hideCart()
