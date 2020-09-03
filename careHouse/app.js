@@ -1,3 +1,10 @@
+const client = contentful.createClient({
+    // This is the space ID. A space is like a project folder in Contentful terms
+    space: "p2d5bnqjasig",
+    // This is the access token for this space. Normally you get both ID and the token in the Contentful web app
+    accessToken: "1soWGn_lvpEGjqb-TuJz0W_f-g3KyBpVqnYfmeuNIHM"
+});
+
 // variables
 
 const cartBtn = document.querySelector(".cart-btn")
@@ -20,9 +27,16 @@ let buttonsDOM = []
 class Products {
     async getProducts() {
         try {
+
+            let contentful = await client.getEntries({
+                content_type: 'careHouseProducts'
+            })
+            console.log(contentful)
+
             let result = await fetch('products.json')
             let data = await result.json()
-            let products = data.items
+
+            let products = contentful.items
             products = products.map(item => {
                 const { title, price } = item.fields
                 const { id } = item.sys
@@ -114,7 +128,7 @@ class UI {
         <div>
             <i class="fas fa-chevron-up" data-id=${item.id}></i>
             <p class="item-amount">${item.amount}</p>
-            <i class="fas fa-chevron-down data-id=${item.id}"></i>
+            <i class="fas fa-chevron-down" data-id=${item.id}></i>
         </div>`
         cartContent.appendChild(div)
 
@@ -158,6 +172,20 @@ class UI {
                 Storage.saveCart(cart)
                 this.setCartValues(cart)
                 addAmount.nextElementSibling.innerText = tempItem.amount
+            }
+            else if (event.target.classList.contains('fa-chevron-down')) {
+                let lowerAmount = event.target
+                let id = lowerAmount.dataset.id
+                let tempItem = cart.find(item => item.id === id)
+                tempItem.amount = tempItem.amount - 1
+                if (tempItem.amount > 0) {
+                    Storage.saveCart(cart)
+                    this.setCartValues(cart)
+                    lowerAmount.previousElementSibling.innerText = tempItem.amount
+                } else {
+                    cartContent.removeChild(lowerAmount.parentElement.parentElement)
+                    this.removeItem(id)
+                }
             }
         })
     }
