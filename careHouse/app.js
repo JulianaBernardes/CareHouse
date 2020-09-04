@@ -16,12 +16,19 @@ const cartItems = document.querySelector(".cart-items")
 const cartTotal = document.querySelector(".cart-total")
 const cartContent = document.querySelector(".cart-content")
 const productsDOM = document.querySelector(".products-center")
+const scrollButton = document.querySelector(".banner-btn")
 
 const btns = document.querySelectorAll(".bag-btn")
 // cart
 let cart = []
 // buttons
 let buttonsDOM = []
+
+// scroll to products
+scrollButton.addEventListener('click', () => {
+    const elmnt = document.querySelector(".products");
+    elmnt.scrollIntoView();
+})
 
 // getting the products
 class Products {
@@ -31,10 +38,9 @@ class Products {
             let contentful = await client.getEntries({
                 content_type: 'careHouseProducts'
             })
-            console.log(contentful)
 
-            let result = await fetch('products.json')
-            let data = await result.json()
+            // let result = await fetch('products.json')
+            // let data = await result.json()
 
             let products = contentful.items
             products = products.map(item => {
@@ -50,8 +56,11 @@ class Products {
     }
 }
 
+
+
 // display products
 class UI {
+
     displayProducts(products) {
         let result = ""
         products.forEach(product => {
