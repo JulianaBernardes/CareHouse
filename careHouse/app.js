@@ -26,8 +26,8 @@ let buttonsDOM = []
 
 // scroll to products
 scrollButton.addEventListener('click', () => {
-    const elmnt = document.querySelector(".products");
-    elmnt.scrollIntoView();
+    const products = document.querySelector(".products");
+    products.scrollIntoView({behavior: "smooth"})
 })
 
 // getting the products
