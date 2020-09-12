@@ -1,6 +1,17 @@
 # Demonstration
-[Demo in netlify](https://carehouse.netlify.app)
 
+<p align="center">
+  <a href="https://carehouse.netlify.app/">
+<img align="center" src="/github/demoOnNetlify.png">
+</a>
+</p>
+
+![DEMO](/github/careHouseDemo.gif)
+
+![SHOPP](/github/careHouse1.png)
+
+![ITEMS CART](/github/careHouse2.png)  
+  
 # Technologies
 :heavy_check_mark: Vanilla JavaScript\
 :heavy_check_mark: CSS\
