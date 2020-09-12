@@ -7,7 +7,7 @@
 :heavy_check_mark: HTML
 
 # Project
-CareHouse is an application made using vanilla JavaScript, which implements the flow of a house furniture shopping cart.
+CareHouse is a website made using vanilla JavaScript, which implements the flow of a house furniture shopping cart.
 * CONTENTFUL\
 During my studies, I used contentful and had my first time implementing Content Delivery API (CDA) in a project in order to make it simpler the website management.
 * NETLIFY\
