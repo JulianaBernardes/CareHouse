@@ -93,9 +93,11 @@ body {
     transition: var(--mainTransition);
     cursor: pointer;
   }
-  .banner-btn:hover {
+  @media (hover: hover) {
+    .banner-btn:hover {
     background: transparent;
     color: var(--primaryColor);
+    }
   }
 
   /* --------------- Entrance ---------------- */
